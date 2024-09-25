@@ -44,7 +44,7 @@ export const Register = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold">Login</h1>
+      <h1 className="text-3xl font-bold">Register</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-4 border border-black w-1/3 p-4 mt-4"
