@@ -67,7 +67,7 @@ export const Login = () => {
         </button>
       </form>
       <p>
-        <a className="text-blue-500 underline" href="auth/register">
+        <a className="text-blue-500 underline" href="register">
           Register
         </a>
       </p>
