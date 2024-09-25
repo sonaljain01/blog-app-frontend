@@ -85,7 +85,7 @@ export const BlogDisplay = () => {
                 <p>{post.description}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <a
-                    href={`blog/${post.slug}`}
+                    href={`blog/${post.id}`}
                     className="text-indigo-600 hover:text-indigo-800"
                   >
                     Read more
