@@ -5,6 +5,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useEffect } from "react";
 
 export const Register = () => {
   const router = useRouter();
@@ -42,9 +44,19 @@ export const Register = () => {
     }
   };
 
+  useEffect(() => {
+    const isLogin = () => {
+      if (localStorage.getItem("token")) {
+        router.push("/");
+      }
+    };
+
+    isLogin();
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center">
-      <h1 className="text-3xl font-bold">Login</h1>
+      <h1 className="text-3xl font-bold">Register</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-4 border border-black w-1/3 p-4 mt-4"
@@ -88,9 +100,9 @@ export const Register = () => {
         </button>
       </form>
       <p>
-        <a className="text-blue-500 underline" href="auth/register">
-          Register
-        </a>
+        <Link className="text-blue-500 underline" href="login">
+          Login
+        </Link>
       </p>
     </div>
   );

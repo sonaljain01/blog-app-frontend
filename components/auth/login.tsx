@@ -4,8 +4,10 @@ import * as z from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/helper/axiosInstance";
-
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export const Login = () => {
+  const router = useRouter();
   const schema = z.object({
     email: z.string().email(),
     password: z.string(),
@@ -15,7 +17,6 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<schemaType>({
     resolver: zodResolver(schema),
@@ -26,10 +27,21 @@ export const Login = () => {
     if (res.data.status) {
       alert("Login Success");
       localStorage.setItem("token", res.data.token);
+      router.push("/dashboard")
     } else {
       alert(res.data.message);
     }
   };
+
+  useEffect(() => {
+    const isLogin = () => {
+      if (localStorage.getItem("token")) {
+        router.push("/");
+      }
+    };
+
+    isLogin();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center">
