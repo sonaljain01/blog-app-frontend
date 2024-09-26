@@ -7,7 +7,13 @@ import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect } from "react";
-
+interface Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 export const Register = () => {
   const router = useRouter();
   const schema = z.object({
@@ -39,7 +45,7 @@ export const Register = () => {
       } else {
         alert(res.data.message);
       }
-    } catch (err: any) {
+    } catch (err: Error | any) {
       alert(err.response.data.message);
     }
   };
