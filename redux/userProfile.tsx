@@ -19,6 +19,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     profile: (state, action) => {
+        console.log(action)
       state.isAuthenticated = true;
       state.email = action.payload.email;
       state.name = action.payload.name;
