@@ -3,7 +3,7 @@ import { useState } from "react";
 import ReactStars from "react-stars";
 
 export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
-  const [ratingInput, setratingInput] = useState("");
+  const [ratingInput, setratingInput] = useState(0);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -17,7 +17,7 @@ export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
         },
       });
       if (res.status == 200) {
-        setratingInput("");
+        setratingInput(0);
         alert(res?.data?.message);
         window.location.reload();
       }
@@ -27,8 +27,7 @@ export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
     }
   };
   const ratingChanged = (newRating: number) => {
-    // setratingInput(newRating.toString());
-    console.log(newRating);
+    setratingInput(newRating);
   };
   return (
     <div id="comment-post">

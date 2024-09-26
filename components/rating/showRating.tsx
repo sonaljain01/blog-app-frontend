@@ -54,7 +54,7 @@ export const ShowRating = ({ id }: { id: string }) => {
       <div id="main-comment-box" className="flex flex-col gap-5">
         <p>{rating.length} Ratings</p>
         {rating.map((comment: any) => (
-          <ReactStars value={comment?.rating} count={5} size={25} color2={"#ffd700"} />
+          <ReactStars value={comment?.rating} count={5} size={25} color2={"#ffd700"} edit={false} />
         ))}
       </div>
     </div>
