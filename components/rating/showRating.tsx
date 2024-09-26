@@ -44,7 +44,6 @@ export const ShowRating = ({ id }: { id: string }) => {
     displayRating();
   }, [id]);
 
-
   return (
     <div id="comments" className="mb-5">
       <p className="text-xl font-bold mb-2">Ratings</p>
@@ -54,7 +53,15 @@ export const ShowRating = ({ id }: { id: string }) => {
       <div id="main-comment-box" className="flex flex-col gap-5">
         <p>{rating.length} Ratings</p>
         {rating.map((comment: any) => (
-          <ReactStars value={comment?.rating} count={5} size={25} color2={"#ffd700"} edit={false} />
+          <div key={comment?._id}>
+            <ReactStars
+              value={comment?.rating}
+              count={5}
+              size={25}
+              color2={"#ffd700"}
+              edit={false}
+            />
+          </div>
         ))}
       </div>
     </div>

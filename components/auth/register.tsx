@@ -7,7 +7,13 @@ import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useEffect } from "react";
-
+interface Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 export const Register = () => {
   const router = useRouter();
   const schema = z.object({
@@ -39,18 +45,18 @@ export const Register = () => {
       } else {
         alert(res.data.message);
       }
-    } catch (err: any) {
+    } catch (err: Error | any) {
       alert(err.response.data.message);
     }
   };
 
-  useEffect(() => {
-    const isLogin = () => {
-      if (localStorage.getItem("token")) {
-        router.push("/");
-      }
-    };
+  const isLogin = () => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  };
 
+  useEffect(() => {
     isLogin();
   }, []);
 
@@ -70,6 +76,7 @@ export const Register = () => {
             placeholder="Your name"
             {...register("name")}
           />
+          {errors.name && <p className="text-red-500">{errors.name.message}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="email">Email</label>
@@ -80,6 +87,9 @@ export const Register = () => {
             placeholder="Your email"
             {...register("email")}
           />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -91,6 +101,9 @@ export const Register = () => {
             placeholder="Your password"
             {...register("password")}
           />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
         <button
           type="submit"

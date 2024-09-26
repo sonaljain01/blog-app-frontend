@@ -27,19 +27,18 @@ export const Login = () => {
     if (res.data.status) {
       alert("Login Success");
       localStorage.setItem("token", res.data.token);
-      router.push("/dashboard")
+      router.push("/dashboard");
     } else {
       alert(res.data.message);
     }
   };
 
+  const isLogin = () => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  };
   useEffect(() => {
-    const isLogin = () => {
-      if (localStorage.getItem("token")) {
-        router.push("/");
-      }
-    };
-
     isLogin();
   }, []);
 
@@ -59,6 +58,9 @@ export const Login = () => {
             placeholder="Your email"
             {...register("email")}
           />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -70,6 +72,9 @@ export const Login = () => {
             placeholder="Your password"
             {...register("password")}
           />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
         <button
           type="submit"

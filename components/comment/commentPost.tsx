@@ -10,6 +10,7 @@ const CommentPost = ({ id, isAuth }: Props) => {
   const [commentInput, setCommentInput] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const sendData = {
         blog_id: id,
