@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useState } from "react";
+import ReactStars from "react-stars";
 
 export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
   const [ratingInput, setratingInput] = useState("");
@@ -25,17 +26,17 @@ export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
       alert(err?.response?.data?.message);
     }
   };
+  const ratingChanged = (newRating: number) => {
+    // setratingInput(newRating.toString());
+    console.log(newRating);
+  };
   return (
     <div id="comment-post">
-      <input
-        type="text"
-        name="rate"
-        id="rate"
-        value={ratingInput}
-        onChange={(e) => setratingInput(e.target.value)}
-        placeholder="Your rate"
-        className="border-b-2 border-indigo-500 outline-none w-full text-xl"
-        disabled={!isAuth}
+      <ReactStars
+        count={5}
+        onChange={ratingChanged}
+        size={50}
+        color2={"#ffd700"}
       />
       {!isAuth && <p>You must be logged in to post rating</p>}
       <button

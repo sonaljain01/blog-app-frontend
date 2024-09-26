@@ -48,7 +48,6 @@ const ShowComment = (props: Props) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(comment.data.data);
       if (comment.status === 200) {
         const formattedData = comment.data.data.map((post: any) => ({
           ...post,

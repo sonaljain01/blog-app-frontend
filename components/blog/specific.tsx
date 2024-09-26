@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./specific.css";
 import { AuthorDetails } from "../authorDetail";
 import CommentPage from "../comment";
+import Rating from "../rating";
 
 interface Blog {
   id: string;
@@ -70,9 +71,8 @@ export const SpecificBlog = (props: { id: string }) => {
                   {blog?.title}
                 </p>
               </div>
-              <div className="ml-4 mt-4 text-base font-serif  flex justify-between">
-                <div>{formattedDate(blog?.created_at)}</div>
-                <div>Rating: 4.5</div>
+              <div className="ml-4 mt-4 text-base font-serif  n">
+                {formattedDate(blog?.created_at)}
               </div>
               <div className="content">
                 <p>{blog?.description}</p>
@@ -82,6 +82,9 @@ export const SpecificBlog = (props: { id: string }) => {
                   name={blog?.users?.name!}
                   email={blog?.users?.email!}
                 />
+              </div>
+              <div className="mb-10">
+                <Rating id={blog?.id} />
               </div>
               <CommentPage id={blog?.id} />
             </main>
