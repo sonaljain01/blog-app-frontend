@@ -1,3 +1,5 @@
+"use client"
+
 import { axiosInstance } from "@/helper/axiosInstance";
 
 export const DeleteBlog = ({ id }: { id: string }) => {

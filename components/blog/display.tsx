@@ -3,6 +3,22 @@
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useEffect, useState } from "react";
 
+interface Post {
+  id: string;
+  title: string;
+  category: string;
+  sub_category: string;
+  description: string;
+  publishedAt: string;
+  image: string;
+  slug: string;
+  users: {
+    name: string;
+    type: string;
+    email: string;
+  };
+  photo: string;
+}
 export const BlogDisplay = () => {
   const [blog, setBlog] = useState([]);
   const fetchData = async () => {
@@ -26,7 +42,6 @@ export const BlogDisplay = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
 
   if (blog.length === 0) {
     return (
@@ -62,9 +77,9 @@ export const BlogDisplay = () => {
           </p>
         </div>
         <div className="mx-auto mt-10 grid gap-10 md:grid-cols-2 lg:grid-cols-3 lg:max-w-7xl">
-          {blog.map((post: any) => (
+          {blog.map((post: Post) => (
             <div
-              key={post._id}
+              key={post.id}
               className="border rounded-lg overflow-hidden shadow-md"
             >
               <img
