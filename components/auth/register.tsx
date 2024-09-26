@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export const Register = () => {
   const router = useRouter();
@@ -88,9 +89,9 @@ export const Register = () => {
         </button>
       </form>
       <p>
-        <a className="text-blue-500 underline" href="auth/register">
-          Register
-        </a>
+        <Link className="text-blue-500 underline" href="login">
+          Login
+        </Link>
       </p>
     </div>
   );

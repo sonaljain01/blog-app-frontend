@@ -27,6 +27,7 @@ export const BlogDisplay = () => {
     fetchData();
   }, []);
 
+
   if (blog.length === 0) {
     return (
       <>
