@@ -2,6 +2,7 @@
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useEffect, useState } from "react";
 import "./specific.css";
+import { AuthorDetails } from "../authorDetail";
 
 interface Blog {
   title: string;
@@ -70,14 +71,14 @@ export const SpecificBlog = (props: { id: string }) => {
               </div>
               <div className="content">
                 <p>{blog?.description}</p>
-                <div className="mb-4">
-                  {/* <AuthorDetails
-                    name={blog?.author?.username!}
-                    username={blog?.author?.username!}
-                  /> */}
-                </div>
-                {/* <CommentPage pageSlug={blog?.slug} /> */}
               </div>
+              <div className="mb-10">
+                <AuthorDetails
+                  name={blog?.users?.name!}
+                  email={blog?.users?.email!}
+                />
+              </div>
+              {/* <CommentPage pageSlug={blog?.slug} /> */}
             </main>
           </div>
         </div>
