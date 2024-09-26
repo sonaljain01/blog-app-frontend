@@ -1,7 +1,14 @@
-"use client"
+"use client";
 
 import { axiosInstance } from "@/helper/axiosInstance";
 
+interface Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 export const DeleteBlog = ({ id }: { id: string }) => {
   const deleteBlog = async () => {
     const token = localStorage.getItem("token");
@@ -17,8 +24,9 @@ export const DeleteBlog = ({ id }: { id: string }) => {
         alert(res?.data?.message);
         window.location.reload();
       }
-    } catch (err: any) {
-      alert(err?.response?.data?.message);
+    } catch (err: Error | any) {
+      // const error = err as AxiosError;
+      alert(err.response.data.message);
     }
   };
 
