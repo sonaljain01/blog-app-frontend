@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export const Register = () => {
   const router = useRouter();
@@ -42,6 +43,16 @@ export const Register = () => {
       alert(err.response.data.message);
     }
   };
+
+  useEffect(() => {
+    const isLogin = () => {
+      if (localStorage.getItem("token")) {
+        router.push("/");
+      }
+    };
+
+    isLogin();
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center">
