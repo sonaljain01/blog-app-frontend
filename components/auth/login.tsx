@@ -47,6 +47,9 @@ export const Login = () => {
             placeholder="Your email"
             {...register("email")}
           />
+          {errors.email && (
+            <p className="text-red-500">{errors.email.message}</p>
+          )}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -58,6 +61,9 @@ export const Login = () => {
             placeholder="Your password"
             {...register("password")}
           />
+          {errors.password && (
+            <p className="text-red-500">{errors.password.message}</p>
+          )}
         </div>
         <button
           type="submit"
