@@ -70,9 +70,9 @@ export const SpecificBlog = (props: { id: string }) => {
                   {blog?.title}
                 </p>
               </div>
-              <div className="ml-4 mt-4 text-base font-serif">
-                {formattedDate(blog?.created_at)}
-                {/* {blog?.created_at} */}
+              <div className="ml-4 mt-4 text-base font-serif  flex justify-between">
+                <div>{formattedDate(blog?.created_at)}</div>
+                <div>Rating: 4.5</div>
               </div>
               <div className="content">
                 <p>{blog?.description}</p>
