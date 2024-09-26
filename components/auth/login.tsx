@@ -27,19 +27,18 @@ export const Login = () => {
     if (res.data.status) {
       alert("Login Success");
       localStorage.setItem("token", res.data.token);
-      router.push("/dashboard")
+      router.push("/dashboard");
     } else {
       alert(res.data.message);
     }
   };
 
+  const isLogin = () => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  };
   useEffect(() => {
-    const isLogin = () => {
-      if (localStorage.getItem("token")) {
-        router.push("/");
-      }
-    };
-
     isLogin();
   }, []);
 

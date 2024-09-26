@@ -44,13 +44,13 @@ export const Register = () => {
     }
   };
 
-  useEffect(() => {
-    const isLogin = () => {
-      if (localStorage.getItem("token")) {
-        router.push("/");
-      }
-    };
+  const isLogin = () => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  };
 
+  useEffect(() => {
     isLogin();
   }, []);
 
