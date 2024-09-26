@@ -5,6 +5,7 @@ export interface AuthState {
   name: string;
   email: string;
   type: string;
+  id:string;
 }
 
 const initialState: AuthState = {
@@ -12,6 +13,7 @@ const initialState: AuthState = {
   email: "",
   name: "",
   type: "",
+  id:"",
 };
 
 export const authSlice = createSlice({
@@ -19,8 +21,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     profile: (state, action) => {
-        console.log(action)
       state.isAuthenticated = true;
+      state.id = action.payload.id;
       state.email = action.payload.email;
       state.name = action.payload.name;
       state.type = action.payload.type;

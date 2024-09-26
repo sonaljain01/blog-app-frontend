@@ -27,6 +27,7 @@ export const Profile = () => {
         setUser(res.data.data);
         dispatch(
           profile({
+            id: res.data.data.id,
             name: res.data.data.name,
             email: res.data.data.email,
             type: res.data.data.type,
