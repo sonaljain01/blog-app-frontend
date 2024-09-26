@@ -27,6 +27,7 @@ export const Login = () => {
     if (res.data.status) {
       alert("Login Success");
       localStorage.setItem("token", res.data.token);
+      router.push("/dashboard")
     } else {
       alert(res.data.message);
     }

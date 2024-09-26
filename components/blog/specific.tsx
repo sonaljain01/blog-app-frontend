@@ -3,8 +3,10 @@ import { axiosInstance } from "@/helper/axiosInstance";
 import { useEffect, useState } from "react";
 import "./specific.css";
 import { AuthorDetails } from "../authorDetail";
+import CommentPage from "../comment";
 
 interface Blog {
+  id: string;
   title: string;
   description: string;
   created_at: string;
@@ -39,12 +41,11 @@ export const SpecificBlog = (props: { id: string }) => {
       });
 
       if (res.status === 200) {
-        console.log(res?.data?.data);
         setBlog(res?.data?.data);
       }
     } catch (err: any) {
       console.log(err?.response?.data?.message);
-      alert(err?.response?.data?.message);
+      // alert(err?.response?.data?.message);
     }
   };
 
@@ -82,7 +83,7 @@ export const SpecificBlog = (props: { id: string }) => {
                   email={blog?.users?.email!}
                 />
               </div>
-              {/* <CommentPage pageSlug={blog?.slug} /> */}
+              <CommentPage id={blog?.id} />
             </main>
           </div>
         </div>
