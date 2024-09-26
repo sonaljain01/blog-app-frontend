@@ -1,6 +1,7 @@
 "use client";
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useEffect, useState } from "react";
+import "./specific.css";
 
 interface Blog {
   title: string;
@@ -8,21 +9,21 @@ interface Blog {
   created_at: string;
   slug: string;
   image: string;
-  author: {
-    username: string;
-    role: string;
-    imageUrl: string;
+  photo: string;
+  users: {
+    name: string;
+    type: string;
     email: string;
   };
 }
 
 function formattedDate(date: any) {
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  }
+  return new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 export const SpecificBlog = (props: { id: string }) => {
   const { id } = props;
   const [blog, setBlog] = useState<Blog>();
@@ -57,7 +58,7 @@ export const SpecificBlog = (props: { id: string }) => {
             <main>
               <div
                 className="title font-mono text-white bg-contain"
-                // style={{ backgroundImage: `url(${blog?.photo})` }}
+                style={{ backgroundImage: `url(${blog?.photo})` }}
               >
                 <p className="ml-4 mb-4 text-3xl font-serif capitalize text-black">
                   {blog?.title}

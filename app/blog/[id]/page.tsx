@@ -5,5 +5,9 @@ export default function SpecificBlogHome({
 }: {
   params: { id: string };
 }) {
-  return <SpecificBlog id={params.id} />;
+  return (
+    <div className="sm:mt-10">
+      <SpecificBlog id={params.id} />
+    </div>
+  );
 }
