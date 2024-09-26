@@ -58,10 +58,14 @@ export const SpecificBlog = (props: { id: string }) => {
           <div id="center" className="w-full">
             <main>
               <div
-                className="title font-mono text-white bg-contain"
-                style={{ backgroundImage: `url(${blog?.photo})` }}
+                className={`title font-mono ${
+                  blog?.photo ? "text-white bg-contain" : "text-black"
+                }`}
+                style={{
+                  backgroundImage: blog?.photo ? `url(${blog.photo})` : "none",
+                }}
               >
-                <p className="ml-4 mb-4 text-3xl font-serif capitalize text-black">
+                <p className="ml-4 mb-4 text-3xl font-serif capitalize">
                   {blog?.title}
                 </p>
               </div>
