@@ -4,6 +4,7 @@ import { axiosInstance } from "@/helper/axiosInstance";
 import { useEffect, useState } from "react";
 
 export interface Comment {
+  id: string;
   comment: string;
   publishedAt: string;
   user: {
@@ -73,7 +74,7 @@ const ShowComment = (props: Props) => {
         <p className="text-xl font-bold mb-2">Comments</p>
         <div id="main-comment-box" className="flex flex-col gap-5">
           {comments.map((comment: Comment) => (
-            <div id="comment">
+            <div id="comment" key={comment.id}>
               <div id="author-name and time" className="flex gap-2 text-lg">
                 <div id="author-name" className="text-black">
                   {comment.user.name}
