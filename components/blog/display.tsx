@@ -19,6 +19,13 @@ interface Post {
   };
   photo: string;
 }
+interface Error {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
 export const BlogDisplay = () => {
   const [blog, setBlog] = useState([]);
   const fetchData = async () => {
@@ -34,7 +41,7 @@ export const BlogDisplay = () => {
       if (res.status === 200) {
         setBlog(res?.data?.data);
       }
-    } catch (err: any) {
+    } catch (err: Error | any) {
       alert(err?.response?.data?.message);
     }
   };
