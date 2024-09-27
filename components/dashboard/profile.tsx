@@ -1,14 +1,13 @@
 "use client";
 
 import { axiosInstance } from "@/helper/axiosInstance";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { profile } from "@/redux/userProfile";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Image from "next/image";
 import { Input } from "../ui/input";
-import { headers } from "next/headers";
 
 interface User {
   name: string;
@@ -16,92 +15,92 @@ interface User {
   type: string;
   profile_image: string;
 }
+
 export const Profile = () => {
   const router = useRouter();
   const dispatch: AppDispatch = useDispatch();
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState<User | null>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [image, setImage] = useState<File | string>("");
+
+  const authToken = localStorage.getItem("token");
+
+  const isAuthenticated = useCallback(() => {
+    if (!authToken) {
+      router.push("/auth/login");
+    }
+  }, [authToken, router]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (
-      event.target.files &&
-      event.target.files[0] &&
-      event.target.files[0].type.includes("image")
-    ) {
-      setImage(event.target.files[0]);
+    const file = event.target.files?.[0];
+    if (file && file.type.includes("image")) {
+      setImage(file);
     } else {
-      alert("Please select an image file");
+      alert("Please select a valid image file.");
     }
   };
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = useCallback(async () => {
+    if (!authToken) return;
+
     try {
       const res = await axiosInstance.get("/user/profile", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        headers: { Authorization: `Bearer ${authToken}` },
       });
+
       if (res.status === 200) {
-        setUser(res.data.data);
-        setName(res.data.data.name);
-        setEmail(res.data.data.email);
-        setImage(res.data.data.profile_image);
+        const { data } = res.data;
+        setUser(data);
+        setName(data.name);
+        setEmail(data.email);
+        setImage(data.profile_image || "");
+
         dispatch(
           profile({
-            id: res.data.data.id,
-            name: res.data.data.name,
-            email: res.data.data.email,
-            type: res.data.data.type,
+            id: data.id,
+            name: data.name,
+            email: data.email,
+            type: data.type,
           })
         );
       }
     } catch (err: any) {
-      alert(err?.response?.data?.message);
+      alert(err?.response?.data?.message || "Failed to fetch profile.");
     }
-  };
-
-  function isAuthenticated() {
-    const token = localStorage.getItem("token");
-
-    if (!token) {
-      router.push("/auth/login");
-    }
-  }
-
-  useEffect(() => {
-    isAuthenticated();
-  }, []);
-
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
+  }, [authToken, dispatch]);
 
   const updateProfile = async () => {
+    if (!authToken) return;
+
     try {
-      const data: any = new FormData();
-      data.append("name", name || "");
-      data.append("email", email || "");
+      const formData = new FormData();
+      formData.append("name", name || "");
+      formData.append("email", email || "");
       if (image && typeof image !== "string") {
-        data.append("profile_image", image);
+        formData.append("profile_image", image);
       }
 
       const res = await axiosInstance.post(
         "/user/profile/update?_method=PUT",
-        data,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
+        formData,
+        { headers: { Authorization: `Bearer ${authToken}` } }
       );
 
       if (res.status === 200) {
-        alert(res?.data?.message);
+        alert(res.data.message);
       }
     } catch (err: any) {
-      console.log(err.response.data.message);
+      alert(err?.response?.data?.message || "Failed to update profile.");
     }
   };
+
+  useEffect(() => {
+    isAuthenticated();
+    if (authToken) {
+      fetchUserProfile();
+    }
+  }, [authToken, fetchUserProfile, isAuthenticated]);
 
   return (
     <div className="bg-white overflow-hidden shadow rounded-lg border">
@@ -122,10 +121,14 @@ export const Profile = () => {
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 space-y-4">
                 <Image
-                  src={user?.profile_image}
+                  src={
+                    user?.profile_image ||
+                    "https://cdn-icons-png.flaticon.com/512/4123/4123763.png"
+                  }
                   width={100}
                   height={100}
-                  alt="Picture of the author"
+                  className="rounded-full border"
+                  alt="Profile Picture"
                 />
                 <Input
                   id="picture"
@@ -167,7 +170,7 @@ export const Profile = () => {
               <dd className="sm:col-span-2">
                 <button
                   onClick={updateProfile}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mb-4 center"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mb-4"
                 >
                   Update Profile
                 </button>
