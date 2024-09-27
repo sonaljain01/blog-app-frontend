@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { axiosInstance } from "@/helper/axiosInstance";
-import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export const BlogInput = () => {
+  const router = useRouter();
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [category, setCategory] = useState<any[]>([]);
   const [childcategory, setchildCategory] = useState<any[]>([]);
@@ -103,7 +104,12 @@ export const BlogInput = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(res);
+      if (res.status === 200) {
+        alert(res?.data?.message);
+        if (value === "publish") {
+          router.push("/blog");
+        }
+      }
     } catch (err: any) {
       console.log(err?.response?.data?.message);
     }
