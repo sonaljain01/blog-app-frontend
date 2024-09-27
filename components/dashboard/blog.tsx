@@ -81,7 +81,7 @@ const BlogCard = (props: { blog: Blog }) => {
           {type === "publish" ? "Published" : "Draft"}
         </span>
         <Link
-          href={`/blog/${slug}`}
+          href={`/blog/edit/${slug}`}
           className="text-indigo-500 hover:text-indigo-700 font-semibold"
         >
           Edit
