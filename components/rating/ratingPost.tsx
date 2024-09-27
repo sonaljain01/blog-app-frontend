@@ -36,6 +36,7 @@ export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
         onChange={ratingChanged}
         size={50}
         color2={"#ffd700"}
+        edit={isAuth}
       />
       {!isAuth && <p>You must be logged in to post rating</p>}
       <button
