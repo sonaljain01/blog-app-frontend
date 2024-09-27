@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReduxProvider>
-        <Header />{children}</ReduxProvider>
+       {children}</ReduxProvider>
       </body>
     </html>
   );

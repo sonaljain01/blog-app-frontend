@@ -22,7 +22,6 @@ export const PostRating = ({ id, isAuth }: { id: string; isAuth: boolean }) => {
         window.location.reload();
       }
     } catch (err: any) {
-      console.log(err?.response?.data?.message);
       alert(err?.response?.data?.message);
     }
   };

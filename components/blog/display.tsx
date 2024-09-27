@@ -29,14 +29,8 @@ interface Error {
 export const BlogDisplay = () => {
   const [blog, setBlog] = useState([]);
   const fetchData = async () => {
-    const token = localStorage.getItem("token");
-
     try {
-      const res = await axiosInstance.get("/blog", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axiosInstance.get("/blog");
 
       if (res.status === 200) {
         setBlog(res?.data?.data);
@@ -105,7 +99,7 @@ export const BlogDisplay = () => {
                   {post.title}
                 </h2>
 
-                <p>{post.description}</p>
+                <p>{post.description.slice(0, 100)}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <a
                     href={`blog/${post.slug}`}

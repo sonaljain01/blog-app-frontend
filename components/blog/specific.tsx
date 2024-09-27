@@ -28,14 +28,14 @@ function formattedDate(date: any) {
     year: "numeric",
   });
 }
-export const SpecificBlog = (props: { id: string }) => {
-  const { id } = props;
+export const SpecificBlog = (props: { slug: string }) => {
+  const { slug } = props;
   const [blog, setBlog] = useState<Blog>();
   const fetchData = async () => {
     const token = localStorage.getItem("token");
 
     try {
-      const res = await axiosInstance.get(`/blog/${id}`, {
+      const res = await axiosInstance.get(`/blog/${slug}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
