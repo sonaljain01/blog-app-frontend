@@ -1,0 +1,8 @@
+.ql-toolbar.ql-snow {
+    border-bottom: 1px solid black !important;
+}
+
+.ql-container.ql-snow {
+    border: none !important;
+    height: auto !important;
+}
