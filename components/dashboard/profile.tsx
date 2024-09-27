@@ -6,11 +6,13 @@ import { useRouter } from "next/navigation";
 import { profile } from "@/redux/userProfile";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
+import Image from "next/image";
 
 interface User {
   name: string;
   email: string;
   type: string;
+  profile_image: string;
 }
 export const Profile = () => {
   const router = useRouter();
@@ -38,7 +40,7 @@ export const Profile = () => {
       alert(err?.response?.data?.message);
     }
   };
-  
+
   function isAuthenticated() {
     const token = localStorage.getItem("token");
 
@@ -63,6 +65,12 @@ export const Profile = () => {
           <p>Name: {user?.name}</p>
           <p>Email: {user?.email}</p>
           <p>Type: {user?.type}</p>
+          <Image
+            src={user?.profile_image}
+            width={100}
+            height={100}
+            alt="Picture of the author"
+          />
         </div>
       )}
     </div>
