@@ -105,7 +105,6 @@ export const BlogEdit = ({ slug }: { slug: string }) => {
       );
       if (res.status === 200) {
         alert(res.data.message);
-        window.location.reload();
         if (type === "publish") {
           router.push("/blog");
         }
