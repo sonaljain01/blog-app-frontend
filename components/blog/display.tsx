@@ -105,7 +105,7 @@ export const BlogDisplay = () => {
                   {post.title}
                 </h2>
 
-                <p>{post.description}</p>
+                <p>{post.description.slice(0, 100)}</p>
                 <div className="mt-4 flex justify-between items-center">
                   <a
                     href={`blog/${post.slug}`}
