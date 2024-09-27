@@ -1,9 +1,8 @@
 "use client";
 
 import { Profile } from "./profile";
-import { SidePanel } from "./sidepanel";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export const Dashboard = () => {
   const router = useRouter();
@@ -17,9 +16,8 @@ export const Dashboard = () => {
   }, []);
 
   return (
-    <>
-      <SidePanel />
+    <div>
       <Profile />
-    </>
+    </div>
   );
 };

@@ -39,21 +39,12 @@ export const Profile = () => {
     }
   };
 
-  const isAuthenticated = () => {
-    if (!localStorage.getItem("token")) {
-      router.push("/auth/login");
-    }
-  };
-  useEffect(() => {
-    isAuthenticated();
-  }, []);
-
   useEffect(() => {
     fetchUserProfile();
   }, []);
 
   return (
-    <div>
+    <div className="flex ml-52">
       <h1>Profile</h1>
       {user && (
         <div>
