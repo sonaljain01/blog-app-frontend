@@ -35,7 +35,7 @@ export const Register = () => {
   const onSubmit: SubmitHandler<schemaType> = async (data) => {
     const sendData = {
       ...data,
-      type: "writer",
+      type: "user",
     };
     try {
       const res = await axiosInstance.post("/auth/register", sendData);
