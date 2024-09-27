@@ -1,4 +1,5 @@
 import { SpecificBlog } from "@/components/blog/specific";
+import { Header } from "@/components/layout/header";
 
 export default function SpecificBlogHome({
   params,
@@ -6,8 +7,11 @@ export default function SpecificBlogHome({
   params: { id: string };
 }) {
   return (
-    <div className="sm:mt-10">
-      <SpecificBlog id={params.id} />
-    </div>
+    <>
+      <Header />
+      <div className="sm:mt-10">
+        <SpecificBlog id={params.id} />
+      </div>
+    </>
   );
 }
