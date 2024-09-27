@@ -14,7 +14,6 @@ export const ShowRating = ({ id }: { id: string }) => {
         },
       });
       if (res.status === 200) {
-        console.log(res.data.data);
         setRating(res.data.data);
       }
     } catch (err: any) {

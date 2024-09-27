@@ -50,7 +50,6 @@ export const UserBlog = () => {
     fetchData();
   }, []);
 
-  console.log(blog);
 
   return (
     <div className="container mx-auto p-4">
