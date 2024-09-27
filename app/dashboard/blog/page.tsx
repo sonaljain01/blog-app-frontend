@@ -1,3 +1,6 @@
-export const DashboardBlogHome = () => {
-  return <h1>Dashboard Blog Home</h1>;
+import { UserBlog } from "@/components/dashboard/blog";
+const DashboardBlogHome = () => {
+  return <UserBlog />;
 };
+
+export default DashboardBlogHome;

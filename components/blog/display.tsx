@@ -29,14 +29,8 @@ interface Error {
 export const BlogDisplay = () => {
   const [blog, setBlog] = useState([]);
   const fetchData = async () => {
-    const token = localStorage.getItem("token");
-
     try {
-      const res = await axiosInstance.get("/blog", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axiosInstance.get("/blog");
 
       if (res.status === 200) {
         setBlog(res?.data?.data);

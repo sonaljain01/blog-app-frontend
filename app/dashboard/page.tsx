@@ -1,4 +1,4 @@
-import { Dashboard } from "@/components/dashboard";
+import { Profile } from "@/components/dashboard/profile";
 export default function DashboardHome() {
-  return <Dashboard />;
+  return <Profile />;
 }

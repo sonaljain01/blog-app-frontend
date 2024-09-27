@@ -38,6 +38,18 @@ export const Profile = () => {
       alert(err?.response?.data?.message);
     }
   };
+  
+  function isAuthenticated() {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      router.push("/auth/login");
+    }
+  }
+
+  useEffect(() => {
+    isAuthenticated();
+  }, []);
 
   useEffect(() => {
     fetchUserProfile();
