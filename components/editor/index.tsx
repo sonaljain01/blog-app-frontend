@@ -37,11 +37,15 @@ const modules = {
   },
 };
 
-export const Editor = () => {
-  const [updatedContent, setUpdatedContent] = useState("");
-
+export const Editor = ({
+  description,
+  setdescription,
+}: {
+  description: string;
+  setdescription: (value: string) => void;
+}) => {
   function handleEditorChange(value: string): void {
-    setUpdatedContent(value);
+    setdescription(value);
   }
 
   return (
@@ -51,12 +55,11 @@ export const Editor = () => {
         onChange={handleEditorChange}
         modules={modules}
         formats={formats}
-        value={updatedContent}
+        value={description}
         bounds="#root"
         placeholder="Write Something"
         className="w-full h-96 border-2 border-black"
       />
-      {updatedContent}
     </>
   );
 };
