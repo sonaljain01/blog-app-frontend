@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Disclosure } from "@headlessui/react";
 import { MdOutlineLogout, MdOutlineDashboard } from "react-icons/md";
@@ -31,7 +31,7 @@ export const SidePanel = () => {
         <div className="p-6 w-1/2 h-screen bg-white z-20 fixed top-0 -left-96 lg:left-0 lg:w-60  peer-focus:left-0 peer:transition ease-out delay-150 duration-200">
           <div className="flex flex-col justify-start item-center">
             <h1 className="text-2xl text-center cursor-pointer font-bold text-blue-900 border-b border-gray-100 pb-4 w-full">
-              Arihant
+              Blog App
             </h1>
             <div className=" my-4 border-b border-gray-100 pb-4">
               {/* Dashboard Link */}
@@ -51,7 +51,7 @@ export const SidePanel = () => {
                     Blog
                   </h3>
                 </div>
-              </Link> 
+              </Link>
             </div>
             {/* Logout Button */}
           </div>

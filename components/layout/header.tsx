@@ -45,7 +45,7 @@ export const Header = () => {
     <header>
       <nav className="flex justify-between p-4 border-b-2 border-black">
         <Link href="/">
-          <h1 className="text-2xl underline">Arihant Jain</h1>
+          <h1 className="text-2xl underline">Blog App</h1>
         </Link>
         <div>
           {isAuthenticated ? (
