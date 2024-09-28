@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { axiosInstance } from "@/helper/axiosInstance";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { BlogInput } from "../blog/input";
 
 interface Blog {
   title: string;
@@ -50,10 +51,23 @@ export const UserBlog = () => {
     fetchData();
   }, []);
 
+  function onBlogCreate() {
+    console.log("create blog");
+    router.push("/blog/create");
+  }
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6 text-center">My Blog Posts</h1>
+      <div className="mb-4 flex gap-3 align-center">
+        <p>Want to add Blog??</p>
+        <button
+          onClick={onBlogCreate}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Create
+        </button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {blog.map((blog) => (
           <BlogCard key={blog.id} blog={blog} />

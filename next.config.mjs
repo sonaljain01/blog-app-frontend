@@ -4,7 +4,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "http",
-        hostname: "206.1.58.168",
+        hostname: "laravel_blog_post.test",
       },
       {
         protocol:"https",
