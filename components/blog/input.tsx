@@ -12,8 +12,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { axiosInstance } from "@/helper/axiosInstance";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export const BlogInput = () => {
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
   const [updatedTitle, setUpdatedTitle] = useState("");
   const [category, setCategory] = useState<any[]>([]);
@@ -114,6 +117,13 @@ export const BlogInput = () => {
       console.log(err?.response?.data?.message);
     }
   };
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      alert("Please login first");
+      router.push("/auth/login");
+    }
+  }, [isAuthenticated]);
 
   return (
     <div className="p-4">
