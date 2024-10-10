@@ -46,7 +46,18 @@ export const Register = () => {
         alert(res.data.message);
       }
     } catch (err: Error | any) {
-      alert(err.response.data.message);
+      if (err.response) {
+        if (err.response.data) {
+          alert(err.response.data.message || "Server error");
+        } else {
+          alert("Unexpected response format from server.");
+        }
+      } else if (err.request) {
+        alert("No response received from the server. Please try again.");
+      } else {
+        alert("Error in setting up the request. Please check your code.");
+      }
+      console.error(err); 
     }
   };
 
