@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ReduxProvider from "@/redux/provider";
-import { Header } from "@/components/layout/header";
+// import { Header } from "@/components/layout/header";
+import AlgoliaClient from "@/helper/algoliaSearch";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <AlgoliaClient>
         <ReduxProvider>
        {children}</ReduxProvider>
+        </AlgoliaClient>
       </body>
     </html>
   );
